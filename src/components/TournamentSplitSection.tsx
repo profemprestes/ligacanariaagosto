@@ -26,7 +26,7 @@ export const TournamentSplitSection: React.FC<TournamentSplitSectionProps> = ({ 
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b-2 border-[#0B2B6B]/15 pb-6">
           <div>
             <div className="editorial-tag mb-3">
-              MAQUETACIÓN EDITORIAL DESIGUAL (65% / 35%)
+              TABLAS Y CRÓNICAS OFICIALES
             </div>
             <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-[#061A42] text-balance">
               EL TORNEO <br />

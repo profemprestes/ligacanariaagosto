@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
-import { Menu, X, Calendar, Trophy, MapPin, Users, Share2, Sparkles, Flame, Newspaper } from 'lucide-react';
+import { Menu, X, Calendar, Trophy, MapPin, Users, Share2, Home, Flame, Newspaper } from 'lucide-react';
 
 interface NavbarProps {
   onOpenFixtureModal?: () => void;
@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenFixtureModal }) => {
   }, []);
 
   const navLinks = [
-    { name: 'INICIO', href: '/', icon: Sparkles },
+    { name: 'INICIO', href: '/', icon: Home },
     { name: 'TORNEO & TABLA', href: '/torneo', icon: Trophy },
     { name: 'CLUBES 3D', href: '/clubes', icon: Users },
     { name: 'SEDES CANELONES', href: '/sedes', icon: MapPin },

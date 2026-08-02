@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Newspaper, Bookmark, Camera, Clock, Award, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Newspaper, Bookmark, Camera, Clock, Award } from 'lucide-react';
 
 interface EpicMoment {
   id: string;

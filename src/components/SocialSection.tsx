@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { SOCIAL_LINKS } from '../data/ligaData';
-import { Share2, ExternalLink, ThumbsUp, Camera, Check, Sparkles, MessageCircle, Heart, Flame } from 'lucide-react';
+import { Share2, ExternalLink, ThumbsUp, Camera, Check, MessageCircle, Heart, Flame } from 'lucide-react';
 
 export const SocialSection: React.FC = () => {
   const [copiedFb, setCopiedFb] = useState(false);

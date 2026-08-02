@@ -70,7 +70,7 @@ export const TeamsCarousel3D: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 border-b border-white/10 pb-8">
           <div>
             <div className="editorial-tag mb-3">
-              CARRUSEL TRIDIMENSIONAL DE CLUBES
+              FRANQUICIAS Y CLUBES AFILIADOS
             </div>
             <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase text-white tracking-tight text-balance">
               LOS CLUBES DE <br />
