@@ -23,6 +23,9 @@ export const AccessibilityWidget: React.FC = () => {
       const savedMotion = localStorage.getItem('lcb_reduce_motion');
       if (savedMotion !== null) {
         setReduceMotion(savedMotion === 'true');
+      } else {
+        const systemMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        setReduceMotion(systemMotion);
       }
     });
   }, []);

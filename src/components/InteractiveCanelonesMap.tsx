@@ -159,7 +159,7 @@ export const InteractiveCanelonesMap: React.FC = () => {
             <span>UBICACIONES Y SEDES OFICIALES</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-black uppercase text-[#061A42] tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-5xl font-black uppercase text-[#061A42] tracking-tight text-balance">
             MAPA INTERACTIVO DE CANELONES
           </h2>
 
@@ -178,7 +178,7 @@ export const InteractiveCanelonesMap: React.FC = () => {
                 <button
                   key={zone}
                   onClick={() => setSelectedZone(zone)}
-                  className={`px-3.5 py-1.5 rounded-xl font-bebas text-xs sm:text-sm tracking-wider transition-all cursor-pointer ${
+                  className={`px-3.5 py-1.5 rounded-xl font-bebas text-xs sm:text-sm tracking-wider transition-colors duration-200 cursor-pointer ${
                     selectedZone === zone
                       ? 'bg-[#FFE600] text-[#061A42] font-bold shadow-md'
                       : 'bg-white/10 text-gray-200 hover:bg-white/20'
@@ -194,10 +194,13 @@ export const InteractiveCanelonesMap: React.FC = () => {
               <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Buscar club, ciudad o gimnasio..."
+                name="search_venue"
+                autocomplete="off"
+                aria-label="Buscar club, ciudad o gimnasio"
+                placeholder="Buscar club, ciudad o gimnasio… (ej. Sauce)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/10 border border-white/20 text-white placeholder-gray-400 pl-9 pr-4 py-2 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#FFE600]"
+                className="w-full bg-white/10 border border-white/20 text-white placeholder-gray-400 pl-9 pr-4 py-2 rounded-xl text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFE600]"
               />
             </div>
 

@@ -100,7 +100,7 @@ export const EpicMomentsNewspaperCarousel: React.FC = () => {
               <span className="text-xs font-serif text-[#0B2B6B]">Momentos Épicos LCB</span>
             </div>
 
-            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#061A42] font-display">
+            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#061A42] font-display text-balance">
               EL DIARIO DE LA LIGA
             </h2>
 
@@ -157,7 +157,7 @@ export const EpicMomentsNewspaperCarousel: React.FC = () => {
 
           {/* Main Article Headline */}
           <div className="space-y-3">
-            <h3 className="font-serif text-3xl sm:text-5xl font-black uppercase text-[#061A42] leading-tight tracking-tight">
+            <h3 className="font-serif text-3xl sm:text-5xl font-black uppercase text-[#061A42] leading-tight tracking-tight text-balance">
               {activeMoment.headline}
             </h3>
             <p className="text-base sm:text-lg font-serif italic text-stone-700 leading-relaxed border-l-4 border-[#FFE600] pl-4">
@@ -176,6 +176,9 @@ export const EpicMomentsNewspaperCarousel: React.FC = () => {
                 <img
                   src={activeMoment.image}
                   alt={activeMoment.headline}
+                  width={800}
+                  height={500}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
 

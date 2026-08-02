@@ -33,7 +33,7 @@ export const EditorialArticlesList: React.FC = () => {
               <span className="text-[#28B838]">{art.readTime}</span>
             </div>
 
-            <h3 className="font-display text-2xl font-extrabold uppercase text-[#061A42] leading-snug">
+            <h3 className="font-display text-2xl font-extrabold uppercase text-[#061A42] leading-snug text-balance">
               {art.title}
             </h3>
 

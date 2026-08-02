@@ -15,7 +15,7 @@ export const VenueViewer: React.FC = () => {
           <div className="editorial-tag text-[#061A42] mb-1">
             VISOR DE SEDES Y CANCHAS
           </div>
-          <h3 className="font-display text-2xl font-extrabold uppercase text-white">
+          <h3 className="font-display text-2xl font-extrabold uppercase text-white text-balance">
             GIMNASIOS CANARIOS
           </h3>
         </div>
@@ -56,6 +56,7 @@ export const VenueViewer: React.FC = () => {
             src={selectedVenue.image} 
             alt={selectedVenue.name}
             fill
+            loading="lazy"
             className="object-cover" 
             referrerPolicy="no-referrer"
           />

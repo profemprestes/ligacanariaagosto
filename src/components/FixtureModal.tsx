@@ -30,7 +30,7 @@ export const FixtureModal: React.FC<FixtureModalProps> = ({ isOpen, onClose }) =
               <span className="text-xs font-bold text-[#28B838] font-bebas tracking-widest uppercase">
                 CALENDARIO OFICIAL • CANELONES 2026
               </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-[#061A42]">
+              <h2 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-[#061A42] text-balance">
                 FIXTURE COMPLETO & DÍAS DE PARTIDO
               </h2>
             </div>
@@ -53,7 +53,7 @@ export const FixtureModal: React.FC<FixtureModalProps> = ({ isOpen, onClose }) =
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-full font-bebas text-sm font-bold transition-all ${
+                className={`px-3.5 py-1.5 rounded-full font-bebas text-sm font-bold transition-colors ${
                   selectedCategory === cat
                     ? 'bg-[#0B2B6B] text-[#FFE600] border border-[#061A42]'
                     : 'bg-white text-gray-700 hover:bg-gray-200 border border-gray-200'
@@ -69,10 +69,13 @@ export const FixtureModal: React.FC<FixtureModalProps> = ({ isOpen, onClose }) =
             <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Buscar club o gimnasio..."
+              name="search_fixture"
+              autocomplete="off"
+              aria-label="Buscar club o gimnasio en fixture"
+              placeholder="Buscar club o gimnasio… (ej. Pando)"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 bg-white rounded-full text-xs border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0B2B6B]"
+              className="w-full pl-9 pr-3 py-1.5 bg-white rounded-full text-xs border border-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B2B6B]"
             />
           </div>
 
@@ -109,7 +112,7 @@ export const FixtureModal: React.FC<FixtureModalProps> = ({ isOpen, onClose }) =
 
                 <div className="flex items-center gap-3">
                   {m.status === 'FINAL' ? (
-                    <div className="bg-[#0B2B6B] text-[#FFE600] font-bebas text-xl font-bold px-4 py-2 rounded-xl">
+                    <div className="bg-[#0B2B6B] text-[#FFE600] font-bebas text-xl font-bold px-4 py-2 rounded-xl tabular-nums">
                       FINAL: {m.homeScore} - {m.awayScore}
                     </div>
                   ) : (
@@ -126,7 +129,7 @@ export const FixtureModal: React.FC<FixtureModalProps> = ({ isOpen, onClose }) =
         {/* Modal Footer */}
         <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
           <button
-            onClick={() => alert('Generando PDF del Fixture Oficial 2026 de la Liga Canaria...')}
+            onClick={() => alert('Generando PDF del Fixture Oficial 2026 de la Liga Canaria…')}
             className="text-xs font-bold font-bebas text-[#0B2B6B] bg-[#28B838]/10 hover:bg-[#28B838] hover:text-white px-4 py-2 rounded-full transition-colors flex items-center gap-1.5"
           >
             <Download className="w-4 h-4" />

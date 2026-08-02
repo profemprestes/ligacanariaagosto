@@ -29,7 +29,7 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({ onOpenDetails, l
             <Trophy className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-display text-2xl font-extrabold uppercase text-[#061A42]">
+            <h3 className="font-display text-2xl font-extrabold uppercase text-[#061A42] text-balance">
               TABLA DE POSICIONES 2026
             </h3>
             <p className="text-xs text-gray-500 font-bold uppercase">
@@ -107,7 +107,7 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({ onOpenDetails, l
                 }`}
               >
                 <td className="py-3.5 px-3 font-extrabold text-base font-bebas text-[#061A42]">
-                  <span className={`w-7 h-7 rounded-lg inline-flex items-center justify-center ${
+                  <span className={`w-7 h-7 rounded-lg inline-flex items-center justify-center tabular-nums ${
                     row.pos === 1 
                       ? 'bg-[#FFE600] text-[#061A42] font-black border border-[#061A42]' 
                       : row.pos <= 4 
@@ -134,13 +134,13 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({ onOpenDetails, l
                     {row.serie}
                   </span>
                 </td>
-                <td className="py-3.5 px-2 text-center font-semibold text-gray-700">{row.pj}</td>
-                <td className="py-3.5 px-2 text-center font-bold text-[#28B838]">{row.pg}</td>
-                <td className="py-3.5 px-2 text-center font-semibold text-gray-500">{row.pp}</td>
-                <td className={`py-3.5 px-2 text-center font-extrabold ${row.dif > 0 ? 'text-[#0B2B6B]' : 'text-red-600'}`}>
+                <td className="py-3.5 px-2 text-center font-semibold text-gray-700 tabular-nums">{row.pj}</td>
+                <td className="py-3.5 px-2 text-center font-bold text-[#28B838] tabular-nums">{row.pg}</td>
+                <td className="py-3.5 px-2 text-center font-semibold text-gray-500 tabular-nums">{row.pp}</td>
+                <td className={`py-3.5 px-2 text-center font-extrabold tabular-nums ${row.dif > 0 ? 'text-[#0B2B6B]' : 'text-red-600'}`}>
                   {row.dif > 0 ? `+${row.dif}` : row.dif}
                 </td>
-                <td className="py-3.5 px-4 text-center font-black text-lg font-bebas bg-[#FFE600]/20 text-[#061A42]">
+                <td className="py-3.5 px-4 text-center font-black text-lg font-bebas bg-[#FFE600]/20 text-[#061A42] tabular-nums">
                   {row.pts}
                 </td>
               </tr>

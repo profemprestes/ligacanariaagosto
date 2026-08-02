@@ -14,7 +14,7 @@ export default function SedesPage() {
   const [isFixtureModalOpen, setIsFixtureModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
+    <main id="main-content" className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
       {/* Floating Navigation Menu */}
       <Navbar onOpenFixtureModal={() => setIsFixtureModalOpen(true)} />
 
@@ -28,7 +28,7 @@ export default function SedesPage() {
             INFRAESTRUCTURA Y GEOLOCALIZACIÓN
           </div>
           
-          <h1 className="font-display text-4xl sm:text-6xl font-black uppercase text-white tracking-tight">
+          <h1 className="font-display text-4xl sm:text-6xl font-black uppercase text-white tracking-tight text-balance">
             SEDES Y <span className="text-[#FFE600]">CANCHAS CANARIAS</span>
           </h1>
           
@@ -45,7 +45,7 @@ export default function SedesPage() {
       <section className="py-16 bg-[#F4F6F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center space-y-2">
-            <h2 className="font-display text-3xl font-extrabold uppercase text-[#061A42]">
+            <h2 className="font-display text-3xl font-extrabold uppercase text-[#061A42] text-balance">
               EXPLORADOR DE SEDES
             </h2>
             <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">
@@ -61,7 +61,7 @@ export default function SedesPage() {
             <div className="lg:col-span-5 space-y-6 bg-white p-6 rounded-3xl border-3 border-[#061A42] shadow-[6px_6px_0px_#061A42]">
               <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
                 <Navigation className="w-6 h-6 text-[#28B838]" />
-                <h3 className="font-bebas text-2xl font-bold text-[#061A42]">
+                <h3 className="font-bebas text-2xl font-bold text-[#061A42] text-balance">
                   RECOMENDACIONES PARA VISITANTES
                 </h3>
               </div>

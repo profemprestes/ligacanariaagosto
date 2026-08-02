@@ -14,7 +14,7 @@ export default function NoticiasPage() {
   const [isFixtureModalOpen, setIsFixtureModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
+    <main id="main-content" className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
       {/* Floating Navigation Menu */}
       <Navbar onOpenFixtureModal={() => setIsFixtureModalOpen(true)} />
 
@@ -28,7 +28,7 @@ export default function NoticiasPage() {
             PRENSA Y COBERURA EDITORIAL
           </div>
           
-          <h1 className="font-display text-4xl sm:text-6xl font-black uppercase text-white tracking-tight">
+          <h1 className="font-display text-4xl sm:text-6xl font-black uppercase text-white tracking-tight text-balance">
             EL DIARIO DE <span className="text-[#28B838]">LA LIGA CANARIA</span>
           </h1>
           
@@ -49,7 +49,7 @@ export default function NoticiasPage() {
               <span className="editorial-tag text-[#061A42] mb-1">
                 TODAS LAS NOTICIAS
               </span>
-              <h2 className="font-display text-3xl font-extrabold uppercase text-[#061A42]">
+              <h2 className="font-display text-3xl font-extrabold uppercase text-[#061A42] text-balance">
                 ÚLTIMAS CRÓNICAS PUBLICADAS
               </h2>
             </div>

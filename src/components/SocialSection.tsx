@@ -33,7 +33,7 @@ export const SocialSection: React.FC = () => {
           <div className="editorial-tag bg-[#FFE600] text-[#061A42] mx-auto">
             COMUNIDAD & CANALES OFICIALES
           </div>
-          <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-white">
+          <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-white text-balance">
             SEGUÍ LA LIGA CANARIA <br />
             <span className="text-[#FFE600] underline decoration-[#28B838] underline-offset-8">
               EN REDES SOCIALES
@@ -84,7 +84,7 @@ export const SocialSection: React.FC = () => {
                   <span>Última publicación destacada en Facebook</span>
                 </div>
                 <p className="text-xs text-gray-600 font-semibold italic">
-                  &quot;¡Gran marco de público en la victoria de Albion! Reviví el álbum fotográfico completo de la Fecha 13...&quot;
+                  “¡Gran marco de público en la victoria de Albion! Reviví el álbum fotográfico completo de la Fecha 13…”
                 </p>
               </div>
             </div>

@@ -22,18 +22,18 @@ export const UpcomingMatchesList: React.FC = () => {
           </div>
 
           <div className="bg-[#F4F6F8] p-4 rounded-2xl border border-gray-200 text-center space-y-2">
-            <div className="font-display text-xl font-extrabold uppercase text-[#061A42]">
+            <div className="font-display text-xl font-extrabold uppercase text-[#061A42] text-balance">
               {m.homeTeam}
             </div>
             <div className="font-bebas text-lg text-[#28B838] font-bold">
               VS
             </div>
-            <div className="font-display text-xl font-extrabold uppercase text-[#061A42]">
+            <div className="font-display text-xl font-extrabold uppercase text-[#061A42] text-balance">
               {m.awayTeam}
             </div>
 
             {m.status === 'FINAL' && (
-              <div className="bg-[#0B2B6B] text-[#FFE600] font-bebas text-2xl font-bold py-1 px-4 rounded-xl inline-block mt-2">
+              <div className="bg-[#0B2B6B] text-[#FFE600] font-bebas text-2xl font-bold py-1 px-4 rounded-xl inline-block mt-2 tabular-nums">
                 RESULTADO: {m.homeScore} - {m.awayScore}
               </div>
             )}

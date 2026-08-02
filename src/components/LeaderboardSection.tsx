@@ -262,7 +262,7 @@ export const LeaderboardSection: React.FC = () => {
             <span>CROMOS DE COLECCIÓN LCB 2026</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black uppercase text-white tracking-tight font-display">
+          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black uppercase text-white tracking-tight font-display text-balance">
             LÍDERES Y FIGURAS DE LA LIGA
           </h2>
 
@@ -307,7 +307,8 @@ export const LeaderboardSection: React.FC = () => {
                 <select
                   value={selectedClub}
                   onChange={(e) => setSelectedClub(e.target.value)}
-                  className="w-full bg-[#061A42] border border-white/20 text-white pl-9 pr-8 py-2 rounded-xl text-xs font-bebas tracking-wide focus:outline-none focus:ring-2 focus:ring-[#FFE600] cursor-pointer appearance-none"
+                  aria-label="Filtrar líderes por club"
+                  className="w-full bg-[#061A42] border border-white/20 text-white pl-9 pr-8 py-2 rounded-xl text-xs font-bebas tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFE600] cursor-pointer appearance-none"
                 >
                   <option value="ALL">🏀 TODOS LOS CLUBES</option>
                   {CLUBES_CANELONES.map((club) => (
@@ -323,10 +324,13 @@ export const LeaderboardSection: React.FC = () => {
                 <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="Buscar jugador..."
+                  name="search_player"
+                  autocomplete="off"
+                  aria-label="Buscar jugador por nombre"
+                  placeholder="Buscar jugador… (ej. Fernández)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-[#061A42] border border-white/20 text-white placeholder-gray-400 pl-9 pr-4 py-2 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#FFE600]"
+                  className="w-full bg-[#061A42] border border-white/20 text-white placeholder-gray-400 pl-9 pr-4 py-2 rounded-xl text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFE600]"
                 />
               </div>
 
@@ -347,10 +351,11 @@ export const LeaderboardSection: React.FC = () => {
             const isTop3 = rank <= 3;
 
             return (
-              <div
+              <button
                 key={player.id}
+                type="button"
                 onClick={() => setModalPlayer(player)}
-                className="group relative cursor-pointer perspective-1000 transition-transform duration-300 hover:-translate-y-2"
+                className="group relative cursor-pointer perspective-1000 transition-transform duration-300 hover:-translate-y-2 text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFE600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B2B6B] rounded-2xl w-full"
               >
                 {/* Collectible Trading Card Frame */}
                 <div className={`relative rounded-2xl p-4 bg-gradient-to-b ${
@@ -392,6 +397,9 @@ export const LeaderboardSection: React.FC = () => {
                       <img
                         src={player.image}
                         alt={player.name}
+                        width={260}
+                        height={320}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
 
@@ -411,11 +419,11 @@ export const LeaderboardSection: React.FC = () => {
                       <span className="text-[10px] font-bebas text-[#28B838] tracking-widest uppercase block">
                         {player.clubName}
                       </span>
-                      <h3 className="font-serif font-black text-lg text-white uppercase leading-tight truncate">
+                      <h3 className="font-serif font-black text-lg text-white uppercase leading-tight truncate text-balance">
                         {player.name}
                       </h3>
                       <p className="text-xs text-[#FFE600] font-bebas italic">
-                        &quot;{player.nickname}&quot;
+                        “{player.nickname}”
                       </p>
                     </div>
 
@@ -423,15 +431,15 @@ export const LeaderboardSection: React.FC = () => {
                     <div className="grid grid-cols-3 gap-1 text-center text-[10px] font-bebas">
                       <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
                         <span className="text-gray-400 block text-[9px]">PTS/PJ</span>
-                        <span className="text-white font-bold text-xs">{player.stats.pointsPerGame}</span>
+                        <span className="text-white font-bold text-xs tabular-nums">{player.stats.pointsPerGame}</span>
                       </div>
                       <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
                         <span className="text-gray-400 block text-[9px]">REB/PJ</span>
-                        <span className="text-white font-bold text-xs">{player.stats.reboundsPerGame}</span>
+                        <span className="text-white font-bold text-xs tabular-nums">{player.stats.reboundsPerGame}</span>
                       </div>
                       <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
                         <span className="text-gray-400 block text-[9px]">AST/PJ</span>
-                        <span className="text-white font-bold text-xs">{player.stats.assistsPerGame}</span>
+                        <span className="text-white font-bold text-xs tabular-nums">{player.stats.assistsPerGame}</span>
                       </div>
                     </div>
 
@@ -446,7 +454,7 @@ export const LeaderboardSection: React.FC = () => {
                   </div>
 
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
@@ -469,13 +477,15 @@ export const LeaderboardSection: React.FC = () => {
               <img
                 src={modalPlayer.image}
                 alt={modalPlayer.name}
+                width={80}
+                height={80}
                 className="w-20 h-20 rounded-2xl object-cover border-2 border-[#FFE600]"
               />
               <div>
                 <span className="bg-[#28B838] text-white text-xs font-bebas px-2.5 py-0.5 rounded-full">
                   {modalPlayer.clubName}
                 </span>
-                <h3 className="font-serif text-2xl font-black text-white uppercase mt-1">
+                <h3 className="font-serif text-2xl font-black text-white uppercase mt-1 text-balance">
                   {modalPlayer.name}
                 </h3>
                 <p className="text-xs text-[#FFE600] font-bebas">
@@ -492,25 +502,25 @@ export const LeaderboardSection: React.FC = () => {
               <div className="grid grid-cols-2 gap-3 text-center font-bebas">
                 <div className="bg-white/5 p-3 rounded-xl border border-white/10">
                   <span className="text-xs text-gray-400 block">PUNTOS POR PARTIDO</span>
-                  <span className="text-2xl text-[#FFE600] font-bold">{modalPlayer.stats.pointsPerGame}</span>
+                  <span className="text-2xl text-[#FFE600] font-bold tabular-nums">{modalPlayer.stats.pointsPerGame}</span>
                 </div>
                 <div className="bg-white/5 p-3 rounded-xl border border-white/10">
                   <span className="text-xs text-gray-400 block">REBOTES POR PARTIDO</span>
-                  <span className="text-2xl text-[#28B838] font-bold">{modalPlayer.stats.reboundsPerGame}</span>
+                  <span className="text-2xl text-[#28B838] font-bold tabular-nums">{modalPlayer.stats.reboundsPerGame}</span>
                 </div>
                 <div className="bg-white/5 p-3 rounded-xl border border-white/10">
                   <span className="text-xs text-gray-400 block">ASISTENCIAS POR PARTIDO</span>
-                  <span className="text-2xl text-blue-400 font-bold">{modalPlayer.stats.assistsPerGame}</span>
+                  <span className="text-2xl text-blue-400 font-bold tabular-nums">{modalPlayer.stats.assistsPerGame}</span>
                 </div>
                 <div className="bg-white/5 p-3 rounded-xl border border-white/10">
                   <span className="text-xs text-gray-400 block">EFECTIVIDAD DE TIRO</span>
-                  <span className="text-2xl text-white font-bold">{modalPlayer.stats.fieldGoalPct}%</span>
+                  <span className="text-2xl text-white font-bold tabular-nums">{modalPlayer.stats.fieldGoalPct}%</span>
                 </div>
               </div>
             </div>
 
             <div className="bg-[#0B2B6B] p-4 rounded-xl border border-white/10 text-xs italic text-gray-200">
-              &quot;{modalPlayer.highlightQuote}&quot;
+              “{modalPlayer.highlightQuote}”
             </div>
 
             <button

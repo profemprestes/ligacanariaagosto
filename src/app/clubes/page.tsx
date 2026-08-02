@@ -17,7 +17,7 @@ export default function ClubesPage() {
   const selectedClub = CLUBES_CANELONES.find((c) => c.id === selectedClubId) || CLUBES_CANELONES[0];
 
   return (
-    <main className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
+    <main id="main-content" className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
       {/* Floating Navigation Menu */}
       <Navbar onOpenFixtureModal={() => setIsFixtureModalOpen(true)} />
 

@@ -13,7 +13,7 @@ export default function EstadisticasPage() {
   const [isFixtureModalOpen, setIsFixtureModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
+    <main id="main-content" className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
       {/* Floating Navigation Menu */}
       <Navbar onOpenFixtureModal={() => setIsFixtureModalOpen(true)} />
 

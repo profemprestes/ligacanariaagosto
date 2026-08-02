@@ -18,7 +18,7 @@ export default function Home() {
   const [isFixtureModalOpen, setIsFixtureModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden">
+    <main id="main-content" className="min-h-screen bg-white text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden">
       {/* Floating Navigation Menu */}
       <Navbar onOpenFixtureModal={() => setIsFixtureModalOpen(true)} />
 

@@ -15,7 +15,7 @@ export default function TorneoPage() {
   const [tab, setTab] = useState<'TABLA' | 'FIXTURE'>('TABLA');
 
   return (
-    <main className="min-h-screen bg-[#F4F6F8] text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
+    <main id="main-content" className="min-h-screen bg-[#F4F6F8] text-[#061A42] selection:bg-[#FFE600] selection:text-[#061A42] overflow-x-hidden pt-28">
       {/* Floating Navigation Menu */}
       <Navbar onOpenFixtureModal={() => setIsFixtureModalOpen(true)} />
 
@@ -31,7 +31,7 @@ export default function TorneoPage() {
             COMPETICIÓN OFICIAL 2026
           </div>
           
-          <h1 className="font-display text-4xl sm:text-6xl font-black uppercase text-white tracking-tight">
+          <h1 className="font-display text-4xl sm:text-6xl font-black uppercase text-white tracking-tight text-balance">
             TORNEO <span className="text-[#FFE600]">CLAUSURA LCB</span>
           </h1>
           
@@ -106,7 +106,7 @@ export default function TorneoPage() {
         ) : (
           <div className="space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-gray-300">
-              <h3 className="font-bebas text-3xl font-extrabold text-[#061A42]">
+              <h3 className="font-bebas text-3xl font-extrabold text-[#061A42] text-balance">
                 PARTIDOS FECHA EN CURSO
               </h3>
               <button

@@ -28,7 +28,7 @@ export const TournamentSplitSection: React.FC<TournamentSplitSectionProps> = ({ 
             <div className="editorial-tag mb-3">
               MAQUETACIÓN EDITORIAL DESIGUAL (65% / 35%)
             </div>
-            <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-[#061A42]">
+            <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-[#061A42] text-balance">
               EL TORNEO <br />
               <span className="text-[#0B2B6B] bg-[#FFE600] px-3 py-0.5 inline-block -rotate-1 border-2 border-[#061A42]">
                 OFICIAL 2026
@@ -104,7 +104,7 @@ export const TournamentSplitSection: React.FC<TournamentSplitSectionProps> = ({ 
                   JUGADOR DESTACADO LA FECHA
                 </span>
                 <h4 className="font-display text-2xl font-extrabold uppercase text-[#FFE600]">
-                  Gonzalo &quot;El Canario&quot; Fernández
+                  Gonzalo “El Canario” Fernández
                 </h4>
                 <p className="text-xs text-gray-300">
                   Club Albion • 28 Puntos, 12 Rebotes y Triple ganador en la victoria sobre Sauce.

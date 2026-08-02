@@ -130,7 +130,7 @@ export const LiveScoreboardBar: React.FC = () => {
 
           <button
             onClick={() => setIsSimulating(!isSimulating)}
-            className={`px-2.5 py-1 rounded-full text-[11px] font-bebas tracking-wide border transition-all ${
+            className={`px-2.5 py-1 rounded-full text-[11px] font-bebas tracking-wide border transition-colors duration-200 ${
               isSimulating
                 ? 'bg-[#FFE600] text-[#061A42] font-bold border-[#061A42]'
                 : 'bg-white/10 text-gray-300 border-white/20'
@@ -150,7 +150,10 @@ export const LiveScoreboardBar: React.FC = () => {
             <ChevronLeft className="w-5 h-5" />
           </button>
 
-          <div className={`bg-[#0B2B6B] px-4 py-1.5 rounded-2xl border border-white/20 flex items-center gap-4 transition-transform duration-300 ${hasPulse ? 'scale-105 border-[#FFE600]' : ''}`}>
+          <div 
+            aria-live="polite"
+            className={`bg-[#0B2B6B] px-4 py-1.5 rounded-2xl border border-white/20 flex items-center gap-4 transition-transform duration-300 ${hasPulse ? 'scale-105 border-[#FFE600]' : ''}`}
+          >
             
             {/* Home Team */}
             <div className="text-right">
@@ -162,7 +165,7 @@ export const LiveScoreboardBar: React.FC = () => {
 
             {/* Score */}
             <div className="bg-[#061A42] px-3 py-1 rounded-xl border border-[#FFE600] text-center min-w-[80px]">
-              <div className="font-bebas text-xl sm:text-2xl font-bold text-[#FFE600] leading-none">
+              <div className="font-bebas text-xl sm:text-2xl font-bold text-[#FFE600] leading-none tabular-nums">
                 {activeMatch.status === 'PRÓXIMO' ? 'VS' : `${activeMatch.homeScore} - ${activeMatch.awayScore}`}
               </div>
               <div className="text-[9px] text-[#28B838] font-bold font-bebas tracking-wider uppercase mt-0.5">

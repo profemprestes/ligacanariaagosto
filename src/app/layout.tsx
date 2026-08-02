@@ -47,6 +47,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         />
       </head>
       <body suppressHydrationWarning className="bg-white text-[#061A42] antialiased selection:bg-[#FFE600] selection:text-[#061A42]">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#FFE600] focus:text-[#061A42] focus:px-4 focus:py-2.5 focus:rounded-full focus:border-2 focus:border-[#061A42] focus:font-bebas focus:text-lg focus:tracking-wider">
+          Saltar al contenido principal
+        </a>
         {children}
       </body>
     </html>

@@ -54,7 +54,7 @@ export const TeamsCarousel3D: React.FC = () => {
             <div className="editorial-tag mb-3">
               CARRUSEL TRIDIMENSIONAL DE CLUBES
             </div>
-            <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase text-white tracking-tight">
+            <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase text-white tracking-tight text-balance">
               LOS CLUBES DE <br />
               <span className="text-[#FFE600] underline decoration-[#28B838] underline-offset-8">
                 CANELONES EN 3D
@@ -112,8 +112,9 @@ export const TeamsCarousel3D: React.FC = () => {
             const scale = isCenter ? 1.05 : Math.max(0.7, 1 - absOffset * 0.15);
 
             return (
-              <div
+              <button
                 key={club.id}
+                type="button"
                 onClick={() => {
                   if (isCenter) {
                     setSelectedClub(club);
@@ -122,7 +123,7 @@ export const TeamsCarousel3D: React.FC = () => {
                     setIsAutoRotate(false);
                   }
                 }}
-                className="absolute w-[290px] sm:w-[360px] h-[460px] sm:h-[520px] rounded-3xl transition-all duration-700 ease-out cursor-pointer transform-style-3d select-none group"
+                className="absolute w-[290px] sm:w-[360px] h-[460px] sm:h-[520px] rounded-3xl transition-[transform,opacity] duration-700 ease-out cursor-pointer transform-style-3d select-none group text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFE600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061A42]"
                 style={{
                   transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
                   opacity,
@@ -131,7 +132,7 @@ export const TeamsCarousel3D: React.FC = () => {
               >
                 {/* Card Outer Structure with Editorial Border */}
                 <div 
-                  className={`w-full h-full rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden border-4 transition-all duration-300 shadow-2xl ${
+                  className={`w-full h-full rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden border-4 transition-[border-color,background-color,box-shadow] duration-300 shadow-2xl ${
                     isCenter 
                       ? 'border-[#FFE600] shadow-[0_20px_50px_rgba(255,230,0,0.25)] bg-[#0B2B6B]' 
                       : 'border-white/20 bg-[#0B2B6B]/80 backdrop-blur-md'
@@ -142,6 +143,9 @@ export const TeamsCarousel3D: React.FC = () => {
                     <img 
                       src={club.image} 
                       alt={club.name}
+                      width={360}
+                      height={520}
+                      loading="lazy"
                       className="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#061A42] via-[#0B2B6B]/80 to-transparent" />
@@ -173,7 +177,7 @@ export const TeamsCarousel3D: React.FC = () => {
                       <MapPin className="w-3.5 h-3.5" />
                       {club.city}
                     </div>
-                    <h3 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-white leading-none group-hover:text-[#FFE600] transition-colors">
+                    <h3 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-white leading-none group-hover:text-[#FFE600] transition-colors text-balance">
                       {club.name}
                     </h3>
                     <p className="text-xs text-gray-300 line-clamp-2 leading-relaxed">
@@ -207,7 +211,7 @@ export const TeamsCarousel3D: React.FC = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
@@ -221,7 +225,7 @@ export const TeamsCarousel3D: React.FC = () => {
                 setActiveIndex(i);
                 setIsAutoRotate(false);
               }}
-              className={`h-2.5 rounded-full transition-all cursor-pointer ${
+              className={`h-2.5 rounded-full transition-[width,background-color] duration-300 cursor-pointer ${
                 i === activeIndex ? 'w-10 bg-[#FFE600]' : 'w-2.5 bg-white/30 hover:bg-white/60'
               }`}
               aria-label={`Ir al club ${c.name}`}
@@ -251,7 +255,7 @@ export const TeamsCarousel3D: React.FC = () => {
                 <span className="text-xs font-bold text-[#FFE600] font-bebas tracking-widest uppercase">
                   FUNDADO EN {selectedClub.founded} • CANELONES
                 </span>
-                <h3 className="font-display text-3xl sm:text-4xl font-extrabold uppercase">
+                <h3 className="font-display text-3xl sm:text-4xl font-extrabold uppercase text-balance">
                   {selectedClub.name}
                 </h3>
                 <p className="text-sm text-gray-300 flex items-center gap-1.5">
@@ -282,19 +286,19 @@ export const TeamsCarousel3D: React.FC = () => {
             {/* Statistics Row */}
             <div className="grid grid-cols-3 gap-3 text-center">
               <div className="bg-[#28B838]/20 border border-[#28B838] p-3 rounded-2xl">
-                <span className="text-2xl font-bold font-bebas text-[#32D643] block">
+                <span className="text-2xl font-bold font-bebas text-[#32D643] block tabular-nums">
                   {selectedClub.stats.pg}
                 </span>
                 <span className="text-xs text-gray-300 font-bold uppercase">Partidos Ganados</span>
               </div>
               <div className="bg-white/5 border border-white/10 p-3 rounded-2xl">
-                <span className="text-2xl font-bold font-bebas text-white block">
+                <span className="text-2xl font-bold font-bebas text-white block tabular-nums">
                   {selectedClub.stats.pp}
                 </span>
                 <span className="text-xs text-gray-300 font-bold uppercase">Partidos Perdidos</span>
               </div>
               <div className="bg-[#FFE600]/20 border border-[#FFE600] p-3 rounded-2xl">
-                <span className="text-2xl font-bold font-bebas text-[#FFE600] block">
+                <span className="text-2xl font-bold font-bebas text-[#FFE600] block tabular-nums">
                   {selectedClub.stats.pts}
                 </span>
                 <span className="text-xs text-gray-300 font-bold uppercase">Puntos en Tabla</span>
