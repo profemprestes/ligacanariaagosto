@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { POSICIONES_TABLA, POSICIONES_SERIE_A, POSICIONES_SERIE_B } from '../data/ligaData';
+import { POSICIONES_TABLA, POSICIONES_SERIE_A, POSICIONES_SERIE_B, CLUBES_CANELONES } from '../data/ligaData';
 import { Trophy, ChevronRight } from 'lucide-react';
 
 interface StandingsTableProps {
@@ -99,53 +99,66 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({ onOpenDetails, l
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 font-medium text-sm">
-            {displayRows.map((row) => (
-              <tr 
-                key={row.team}
-                className={`hover:bg-[#28B838]/10 transition-colors ${
-                  row.pos <= 4 ? 'bg-emerald-50/50' : ''
-                }`}
-              >
-                <td className="py-3.5 px-3 font-extrabold text-base font-bebas text-[#061A42]">
-                  <span className={`w-7 h-7 rounded-lg inline-flex items-center justify-center tabular-nums ${
-                    row.pos === 1 
-                      ? 'bg-[#FFE600] text-[#061A42] font-black border border-[#061A42]' 
-                      : row.pos <= 4 
-                      ? 'bg-[#0B2B6B] text-white font-bold' 
-                      : 'bg-gray-100 text-gray-700'
-                  }`}>
-                    {row.pos}
-                  </span>
-                </td>
-                <td className="py-3.5 px-4 font-bold text-[#061A42] text-base flex items-center gap-2">
-                  {row.team}
-                  {row.pos <= 4 && (
-                    <span className="text-[10px] bg-[#28B838] text-white font-black px-1.5 py-0.5 rounded uppercase">
-                      PLAYOFFS
-                    </span>
-                  )}
-                </td>
-                <td className="py-3.5 px-2 text-center">
-                  <span className={`text-[10px] font-bold font-bebas px-2 py-0.5 rounded-full border ${
-                    row.serie === 'SERIE A'
-                      ? 'bg-blue-50 text-[#0B2B6B] border-blue-200'
-                      : 'bg-amber-50 text-amber-800 border-amber-200'
-                  }`}>
-                    {row.serie}
-                  </span>
-                </td>
-                <td className="py-3.5 px-2 text-center font-semibold text-gray-700 tabular-nums">{row.pj}</td>
-                <td className="py-3.5 px-2 text-center font-bold text-[#28B838] tabular-nums">{row.pg}</td>
-                <td className="py-3.5 px-2 text-center font-semibold text-gray-500 tabular-nums">{row.pp}</td>
-                <td className={`py-3.5 px-2 text-center font-extrabold tabular-nums ${row.dif > 0 ? 'text-[#0B2B6B]' : 'text-red-600'}`}>
-                  {row.dif > 0 ? `+${row.dif}` : row.dif}
-                </td>
-                <td className="py-3.5 px-4 text-center font-black text-lg font-bebas bg-[#FFE600]/20 text-[#061A42] tabular-nums">
-                  {row.pts}
-                </td>
-              </tr>
-            ))}
-          </tbody>
+             {displayRows.map((row) => {
+               const clubInfo = CLUBES_CANELONES.find(c => c.name === row.team);
+               const logo = clubInfo?.logo;
+               const emoji = clubInfo?.badgeSymbol || '🏀';
+
+               return (
+                 <tr 
+                   key={row.team}
+                   className={`hover:bg-[#28B838]/10 transition-colors ${
+                     row.pos <= 4 ? 'bg-emerald-50/50' : ''
+                   }`}
+                 >
+                   <td className="py-3.5 px-3 font-extrabold text-base font-bebas text-[#061A42]">
+                     <span className={`w-7 h-7 rounded-lg inline-flex items-center justify-center tabular-nums ${
+                       row.pos === 1 
+                         ? 'bg-[#FFE600] text-[#061A42] font-black border border-[#061A42]' 
+                         : row.pos <= 4 
+                         ? 'bg-[#0B2B6B] text-white font-bold' 
+                         : 'bg-gray-100 text-gray-700'
+                     }`}>
+                       {row.pos}
+                     </span>
+                   </td>
+                   <td className="py-3.5 px-4 font-bold text-[#061A42] text-base flex items-center gap-2">
+                     {logo ? (
+                       <div className="w-6 h-6 rounded bg-white border border-gray-200 p-0.5 flex items-center justify-center flex-shrink-0">
+                         <img src={logo} alt={row.team} className="w-full h-full object-contain" />
+                       </div>
+                     ) : (
+                       <span className="text-sm flex-shrink-0">{emoji}</span>
+                     )}
+                     <span>{row.team}</span>
+                     {row.pos <= 4 && (
+                       <span className="text-[10px] bg-[#28B838] text-white font-black px-1.5 py-0.5 rounded uppercase">
+                         PLAYOFFS
+                       </span>
+                     )}
+                   </td>
+                   <td className="py-3.5 px-2 text-center">
+                     <span className={`text-[10px] font-bold font-bebas px-2 py-0.5 rounded-full border ${
+                       row.serie === 'SERIE A'
+                         ? 'bg-blue-50 text-[#0B2B6B] border-blue-200'
+                         : 'bg-amber-50 text-amber-800 border-amber-200'
+                     }`}>
+                       {row.serie}
+                     </span>
+                   </td>
+                   <td className="py-3.5 px-2 text-center font-semibold text-gray-700 tabular-nums">{row.pj}</td>
+                   <td className="py-3.5 px-2 text-center font-bold text-[#28B838] tabular-nums">{row.pg}</td>
+                   <td className="py-3.5 px-2 text-center font-semibold text-gray-500 tabular-nums">{row.pp}</td>
+                   <td className={`py-3.5 px-2 text-center font-extrabold tabular-nums ${row.dif > 0 ? 'text-[#0B2B6B]' : 'text-red-600'}`}>
+                     {row.dif > 0 ? `+${row.dif}` : row.dif}
+                   </td>
+                   <td className="py-3.5 px-4 text-center font-black text-lg font-bebas bg-[#FFE600]/20 text-[#061A42] tabular-nums">
+                     {row.pts}
+                   </td>
+                 </tr>
+               );
+             })}
+           </tbody>
         </table>
       </div>
     </div>

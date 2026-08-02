@@ -105,10 +105,18 @@ export default function ClubesPage() {
           <div className="bg-white rounded-3xl border-3 border-[#061A42] p-6 sm:p-8 shadow-[8px_8px_0px_#061A42] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5 flex flex-col items-center text-center space-y-4 border-b lg:border-b-0 lg:border-r border-gray-200 pb-6 lg:pb-0 lg:pr-8">
               <div 
-                className="w-32 h-32 rounded-3xl border-4 border-[#061A42] shadow-xl flex items-center justify-center p-4"
-                style={{ backgroundColor: selectedClub.color }}
+                className="w-32 h-32 rounded-3xl border-4 border-[#061A42] shadow-xl flex items-center justify-center p-3.5 bg-white"
               >
-                <Shield className="w-16 h-16 text-white drop-shadow-md" />
+                {selectedClub.logo ? (
+                  <img src={selectedClub.logo} alt={selectedClub.name} className="w-full h-full object-contain" />
+                ) : (
+                  <div 
+                    className="w-full h-full rounded-xl flex items-center justify-center"
+                    style={{ backgroundColor: selectedClub.color }}
+                  >
+                    <span className="text-5xl drop-shadow-md">{selectedClub.badgeSymbol}</span>
+                  </div>
+                )}
               </div>
 
               <div>

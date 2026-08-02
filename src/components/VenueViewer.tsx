@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { SEDES_CANELONES, Venue } from '../data/ligaData';
+import { SEDES_CANELONES, CLUBES_CANELONES, Venue } from '../data/ligaData';
 import { MapPin } from 'lucide-react';
 
 export const VenueViewer: React.FC = () => {
@@ -79,6 +79,31 @@ export const VenueViewer: React.FC = () => {
           <div className="flex justify-between text-gray-300">
             <span>Superficie de Juego:</span>
             <span className="text-white font-bold">{selectedVenue.surface}</span>
+          </div>
+
+          <div className="flex justify-between items-center text-gray-300 py-1">
+            <span>Clubes Locales:</span>
+            <div className="flex items-center gap-1.5">
+              {selectedVenue.clubs.map((clubName) => {
+                const clubInfo = CLUBES_CANELONES.find(c => c.name === clubName);
+                const logo = clubInfo?.logo;
+                const emoji = clubInfo?.badgeSymbol || '🏀';
+                
+                return (
+                  <div 
+                    key={clubName} 
+                    title={clubName}
+                    className="w-6 h-6 rounded bg-white border border-white/20 p-0.5 flex items-center justify-center shadow-2xs flex-shrink-0"
+                  >
+                    {logo ? (
+                      <img src={logo} alt={clubName} className="w-full h-full object-contain" />
+                    ) : (
+                      <span className="text-[10px]">{emoji}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <div className="bg-[#FFE600]/15 p-2.5 rounded-xl border border-[#FFE600]/30 space-y-1">

@@ -206,6 +206,14 @@ const PLAYER_LEADERS: PlayerLeader[] = [
   }
 ];
 
+const getClubInfo = (clubId: string) => {
+  const normId = clubId.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return CLUBES_CANELONES.find(c => {
+    const normC = c.id.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return normC.includes(normId) || normId.includes(normC);
+  });
+};
+
 export const LeaderboardSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<'ANOTADORES' | 'REBOTES' | 'ASISTENCIAS' | 'EFICIENCIA'>('ANOTADORES');
   const [selectedClub, setSelectedClub] = useState<string>('ALL');
@@ -433,10 +441,21 @@ export const LeaderboardSection: React.FC = () => {
                     </div>
 
                     {/* Player Identity */}
-                    <div className="space-y-1 text-center border-b border-white/10 pb-2">
-                      <span className="text-[10px] font-bebas text-[#28B838] tracking-widest uppercase block">
-                        {player.clubName}
-                      </span>
+                    <div className="space-y-1 text-center border-b border-white/10 pb-2 flex flex-col items-center justify-center">
+                      <div className="flex items-center gap-1.5 justify-center">
+                        {getClubInfo(player.clubId)?.logo ? (
+                          <img 
+                            src={getClubInfo(player.clubId)?.logo} 
+                            alt={player.clubName} 
+                            className="w-4 h-4 object-contain bg-white rounded-xs p-0.5 border border-[#061A42]" 
+                          />
+                        ) : (
+                          <span className="text-[10px]">{getClubInfo(player.clubId)?.badgeSymbol || '🏀'}</span>
+                        )}
+                        <span className="text-[10px] font-bebas text-[#28B838] tracking-widest uppercase block">
+                          {player.clubName}
+                        </span>
+                      </div>
                       <h3 className="font-serif font-black text-lg text-white uppercase leading-tight truncate text-balance">
                         {player.name}
                       </h3>
@@ -500,9 +519,18 @@ export const LeaderboardSection: React.FC = () => {
                 className="w-20 h-20 rounded-2xl object-cover border-2 border-[#FFE600]"
               />
               <div>
-                <span className="bg-[#28B838] text-white text-xs font-bebas px-2.5 py-0.5 rounded-full">
-                  {modalPlayer.clubName}
-                </span>
+                <div className="flex items-center gap-1.5 mb-1">
+                  {getClubInfo(modalPlayer.clubId)?.logo ? (
+                    <div className="w-6 h-6 rounded-md bg-white border border-[#061A42] p-0.5 flex items-center justify-center shadow-xs">
+                      <img src={getClubInfo(modalPlayer.clubId)?.logo} alt={modalPlayer.clubName} className="w-full h-full object-contain" />
+                    </div>
+                  ) : (
+                    <span className="text-sm">{getClubInfo(modalPlayer.clubId)?.badgeSymbol || '🏀'}</span>
+                  )}
+                  <span className="bg-[#28B838] text-white text-xs font-bebas px-2.5 py-0.5 rounded-full">
+                    {modalPlayer.clubName}
+                  </span>
+                </div>
                 <h3 className="font-serif text-2xl font-black text-white uppercase mt-1 text-balance">
                   {modalPlayer.name}
                 </h3>
