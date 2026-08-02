@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+@theme {
+  --color-azul-rey: #0B2B6B;
+  --color-azul-rey-dark: #061A42;
+  --color-verde-vibrante: #28B838;
+  --color-verde-vibrante-bright: #32D643;
+  --color-amarillo-brillante: #FFE600;
+  --color-amarillo-hover: #E6D000;
+  --color-gris-deportivo: #F4F6F8;
+  --color-gris-borde: #E2E8F0;
+
+  --font-bebas: var(--font-bebas), 'Bebas Neue', sans-serif;
+  --font-inter: var(--font-inter), 'Inter', sans-serif;
+  --font-syne: var(--font-syne), 'Syne', sans-serif;
+}
+
 @layer base {
   :root {
     --azul-rey: #0B2B6B;
@@ -14,17 +29,27 @@
 
   body {
     background-color: #FFFFFF;
-    color: #061A42;
-    font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--color-azul-rey-dark);
+    font-family: var(--font-inter);
     overflow-x: hidden;
   }
 
   h1, h2, h3, .font-display {
-    font-family: var(--font-syne), var(--font-bebas), 'Syne', 'Bebas Neue', sans-serif;
+    font-family: var(--font-syne);
   }
 
   .font-bebas {
-    font-family: var(--font-bebas), 'Bebas Neue', 'Syne', sans-serif;
+    font-family: var(--font-bebas);
+  }
+
+  /* Accessible Focus Outlines */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--color-amarillo-brillante);
+    outline-offset: 2px;
   }
 }
 
