@@ -7,6 +7,7 @@ export interface Club {
   color: string;
   accentColor: string;
   badgeSymbol: string;
+  logo?: string;
   championships: number;
   stadium: string;
   captain: string;
@@ -82,6 +83,7 @@ export const CLUBES_CANELONES: Club[] = [
     color: '#28B838',
     accentColor: '#0B2B6B',
     badgeSymbol: '🌿',
+    logo: '/equipos/logo_sauce.jpg',
     championships: 4,
     stadium: 'Gimnasio Municipal de Sauce',
     captain: 'Facundo "Rayo" Silva',
@@ -114,6 +116,7 @@ export const CLUBES_CANELONES: Club[] = [
     color: '#0B2B6B',
     accentColor: '#FFE600',
     badgeSymbol: '🦅',
+    logo: '/equipos/logo_albion.jpg',
     championships: 5,
     stadium: 'Gimnasio Albion Pan de Azúcar',
     captain: 'Gonzalo "El Canario" Fernández',
@@ -162,6 +165,7 @@ export const CLUBES_CANELONES: Club[] = [
     color: '#FFE600',
     accentColor: '#061A42',
     badgeSymbol: '🐤',
+    logo: '/equipos/logo_canarios.jpg',
     championships: 3,
     stadium: 'Gimnasio Complejo Plaza de Deportes',
     captain: 'Nicolás "Canario" Bauzá',
@@ -178,6 +182,7 @@ export const CLUBES_CANELONES: Club[] = [
     color: '#061A42',
     accentColor: '#28B838',
     badgeSymbol: '🏰',
+    logo: '/equipos/logo_santalucia.jpg',
     championships: 2,
     stadium: 'Gimnasio Municipal de Santa Lucía',
     captain: 'Santiago "Chino" Morales',

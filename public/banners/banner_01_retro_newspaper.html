@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banner LCB - Opción 1: Periodico Retro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@800&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 1920px;
+      height: 600px;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      background-color: #EFECE6;
+      position: relative;
+    }
+    
+    /* Background Image with Halftone Shader */
+    .bg-container {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(115%) sepia(30%);
+      opacity: 0.85;
+    }
+    .halftone-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(#000 1px, transparent 1px);
+      background-size: 5px 5px;
+      opacity: 0.15;
+      mix-blend-mode: multiply;
+    }
+    .paper-texture {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(#1c1917 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+      opacity: 0.1;
+    }
+
+    /* Red Editorial Frame Border */
+    .border-frame {
+      position: absolute;
+      inset: 20px;
+      border: 4px solid #061A42;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .border-double-line {
+      position: absolute;
+      inset: 28px;
+      border: 1px solid #061A42;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* Content Layout */
+    .content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Top Masthead */
+    .masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061A42;
+      padding-bottom: 12px;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.05em;
+      color: #061A42;
+    }
+    .masthead-left {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .masthead-center {
+      background: #FFE600;
+      border: 2px solid #061A42;
+      padding: 4px 16px;
+      border-radius: 4px;
+      font-size: 24px;
+      font-weight: 900;
+      transform: rotate(-1deg);
+    }
+    .masthead-right {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Main Typography Composition */
+    .main-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: auto;
+      padding-bottom: 10px;
+    }
+
+    .titles {
+      max-width: 1000px;
+    }
+    .category-tag {
+      display: inline-block;
+      background: #28B838;
+      color: white;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      padding: 4px 16px;
+      border: 2px solid #061A42;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      transform: rotate(0.5deg);
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 96px;
+      font-weight: 800;
+      line-height: 0.9;
+      text-transform: uppercase;
+      color: #061A42;
+      text-shadow: 4px 4px 0px #FFE600;
+      margin-bottom: 8px;
+    }
+    p.subheadline {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #334155;
+      max-width: 750px;
+      border-left: 5px solid #28B838;
+      padding-left: 16px;
+      margin-top: 12px;
+    }
+
+    /* Call To Action (CTA) Button (Bottom-Right) */
+    .cta-area {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+    .logo-container {
+      background: white;
+      border: 3px solid #061A42;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 4px 4px 0px #061A42;
+      font-size: 40px;
+    }
+    .cta-button {
+      background: #FFE600;
+      color: #061A42;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      padding: 12px 36px;
+      border: 3px solid #061A42;
+      border-radius: 50px;
+      box-shadow: 6px 6px 0px #061A42;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Outer Editorial Borders -->
+  <div class="border-frame"></div>
+  <div class="border-double-line"></div>
+
+  <!-- Background Imagery -->
+  <div class="bg-container">
+    <img src="retro_newspaper.jpg" alt="Background" class="bg-image">
+    <div class="halftone-overlay"></div>
+    <div class="paper-texture"></div>
+  </div>
+
+  <!-- Content Layer -->
+  <div class="content">
+    
+    <!-- Masthead Header -->
+    <div class="masthead">
+      <div class="masthead-left">CANELONES • URUGUAY</div>
+      <div class="masthead-center">EDICIÓN IMPRESA PORTAL LCB</div>
+      <div class="masthead-right">PRECIO: PASIÓN DE BARRIO</div>
+    </div>
+
+    <!-- Main Title and Actions -->
+    <div class="main-body">
+      <div class="titles">
+        <span class="category-tag">HEMEROTECA HISTÓRICA LCB</span>
+        <h1>LIGA CANARIA<br>DE BASKET</h1>
+        <p class="subheadline">El torneo más apasionante del básquetbol regional reescrito con garra y diseño editorial.</p>
+      </div>
+
+      <div class="cta-area">
+        <!-- Logo Stamp -->
+        <div class="logo-container">🏀</div>
+        <!-- Action Button -->
+        <div class="cta-button">EXPLORAR FIXTURE &rarr;</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

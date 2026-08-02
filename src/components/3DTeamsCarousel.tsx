@@ -171,10 +171,16 @@ export const TeamsCarousel3D: React.FC = () => {
 
                   {/* Top Badge Symbol & Serie Badge */}
                   <div className="relative z-10 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-4xl sm:text-5xl drop-shadow-md">
-                        {club.badgeSymbol}
-                      </span>
+                    <div className="flex items-center gap-2.5">
+                      {club.logo ? (
+                        <div className="w-12 h-12 rounded-xl bg-white border border-[#061A42] p-1.5 flex items-center justify-center shadow-sm">
+                          <img src={club.logo} alt={club.name} className="w-full h-full object-contain" />
+                        </div>
+                      ) : (
+                        <span className="text-4xl sm:text-5xl drop-shadow-md">
+                          {club.badgeSymbol}
+                        </span>
+                      )}
                       <span className={`text-[11px] font-bold font-bebas px-2.5 py-0.5 rounded-full border shadow-sm ${
                         club.serie === 'SERIE A'
                           ? 'bg-[#FFE600] text-[#061A42] border-[#061A42]'
@@ -268,7 +274,13 @@ export const TeamsCarousel3D: React.FC = () => {
 
             {/* Modal Header */}
             <div className="flex items-center gap-4">
-              <span className="text-6xl">{selectedClub.badgeSymbol}</span>
+              {selectedClub.logo ? (
+                <div className="w-20 h-20 rounded-2xl bg-white border-3 border-[#061A42] p-2.5 flex items-center justify-center shadow-md">
+                  <img src={selectedClub.logo} alt={selectedClub.name} className="w-full h-full object-contain" />
+                </div>
+              ) : (
+                <span className="text-6xl">{selectedClub.badgeSymbol}</span>
+              )}
               <div>
                 <span className="text-xs font-bold text-[#FFE600] font-bebas tracking-widest uppercase">
                   FUNDADO EN {selectedClub.founded} • CANELONES

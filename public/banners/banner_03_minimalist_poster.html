@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banner LCB - Opción 3: Póster Suizo Minimalista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 1920px;
+      height: 600px;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      background-color: #F8F6F2;
+      position: relative;
+    }
+    
+    /* Background Image */
+    .bg-container {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+      mix-blend-mode: multiply;
+    }
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(#061A42 1px, transparent 1px),
+                        linear-gradient(90deg, #061A42 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    /* Red Editorial Frame Border */
+    .border-frame {
+      position: absolute;
+      inset: 0;
+      border: 12px solid #061A42;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* Content Layout */
+    .content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      padding: 80px 100px;
+      display: grid;
+      grid-template-cols: 12fr 4fr;
+      align-items: center;
+    }
+
+    /* Typography Column */
+    .titles {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      border-left: 8px solid #061A42;
+      padding-left: 36px;
+    }
+
+    .badge-swiss {
+      background: #061A42;
+      color: #FFE600;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 0.15em;
+      padding: 4px 12px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 96px;
+      font-weight: 800;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: #061A42;
+    }
+
+    p.subheadline {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #475569;
+      max-width: 900px;
+      line-height: 1.5;
+    }
+
+    /* CTA Column (Right) */
+    .cta-area {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+    }
+    
+    .cta-button {
+      background: #FFE600;
+      color: #061A42;
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 18px 40px;
+      border: 4px solid #061A42;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 200ms ease;
+    }
+    .cta-button:hover {
+      background: #061A42;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Outer Swiss Borders -->
+  <div class="border-frame"></div>
+
+  <!-- Background Imagery -->
+  <div class="bg-container">
+    <img src="minimalist_poster.jpg" alt="Background" class="bg-image">
+    <div class="grid-lines"></div>
+  </div>
+
+  <!-- Content Layer -->
+  <div class="content">
+    
+    <!-- Left Column -->
+    <div class="titles">
+      <span class="badge-swiss">LIGA CANARIA DE BASKET • EST. 2012</span>
+      <h1>TEMPORADA 2026</h1>
+      <p class="subheadline">El torneo oficial de básquetbol de Canelones, estructurado con precisión, pasión y garra local.</p>
+    </div>
+
+    <!-- Right Column -->
+    <div class="cta-area">
+      <div class="cta-button">VER FIXTURE &rarr;</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
