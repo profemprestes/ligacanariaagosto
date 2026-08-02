@@ -195,7 +195,7 @@ export const InteractiveCanelonesMap: React.FC = () => {
               <input
                 type="text"
                 name="search_venue"
-                autocomplete="off"
+                autoComplete="off"
                 aria-label="Buscar club, ciudad o gimnasio"
                 placeholder="Buscar club, ciudad o gimnasio… (ej. Sauce)"
                 value={searchQuery}

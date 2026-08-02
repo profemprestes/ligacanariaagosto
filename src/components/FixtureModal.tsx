@@ -70,7 +70,7 @@ export const FixtureModal: React.FC<FixtureModalProps> = ({ isOpen, onClose }) =
             <input
               type="text"
               name="search_fixture"
-              autocomplete="off"
+              autoComplete="off"
               aria-label="Buscar club o gimnasio en fixture"
               placeholder="Buscar club o gimnasio… (ej. Pando)"
               value={searchTerm}

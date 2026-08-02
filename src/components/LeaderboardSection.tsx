@@ -325,7 +325,7 @@ export const LeaderboardSection: React.FC = () => {
                 <input
                   type="text"
                   name="search_player"
-                  autocomplete="off"
+                  autoComplete="off"
                   aria-label="Buscar jugador por nombre"
                   placeholder="Buscar jugador… (ej. Fernández)"
                   value={searchQuery}
