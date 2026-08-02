@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-azul-rey: #0B2B6B;
-  --color-azul-rey-dark: #061A42;
-  --color-verde-vibrante: #28B838;
-  --color-verde-vibrante-bright: #32D643;
-  --color-amarillo-brillante: #FFE600;
-  --color-amarillo-hover: #E6D000;
-  --color-gris-deportivo: #F4F6F8;
-  --color-gris-borde: #E2E8F0;
+  --color-azul-rey: #18181B; /* Carbón Estadio */
+  --color-azul-rey-dark: #0F172A; /* Carbón Estadio Dark */
+  --color-verde-vibrante: #059669; /* Verde Parquet */
+  --color-verde-vibrante-bright: #10B981; /* Verde Parquet Light */
+  --color-amarillo-brillante: #F59E0B; /* Oro Canario */
+  --color-amarillo-hover: #D97706; /* Oro Canario Dark */
+  --color-rojo-pasion: #DC2626; /* Rojo Pasión */
+  --color-gris-deportivo: #FDFBF7; /* Papel Crema */
+  --color-gris-borde: #E4E4E7; /* Borde Sólido */
 
   --font-bebas: var(--font-bebas), 'Bebas Neue', sans-serif;
   --font-inter: var(--font-inter), 'Inter', sans-serif;
@@ -17,14 +18,15 @@
 
 @layer base {
   :root {
-    --azul-rey: #0B2B6B;
-    --azul-rey-dark: #061A42;
-    --verde-vibrante: #28B838;
-    --verde-vibrante-bright: #32D643;
-    --amarillo-brillante: #FFE600;
-    --amarillo-hover: #E6D000;
-    --gris-deportivo: #F4F6F8;
-    --gris-borde: #E2E8F0;
+    --azul-rey: #18181B;
+    --azul-rey-dark: #0F172A;
+    --verde-vibrante: #059669;
+    --verde-vibrante-bright: #10B981;
+    --amarillo-brillante: #F59E0B;
+    --amarillo-hover: #D97706;
+    --rojo-pasion: #DC2626;
+    --gris-deportivo: #FDFBF7;
+    --gris-borde: #E4E4E7;
   }
 
   body {
@@ -132,11 +134,11 @@
   background: #F8F9FA;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0B2B6B;
+  background: var(--azul-rey);
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #28B838;
+  background: var(--verde-vibrante);
 }
 
 /* Accessibility Modes */
@@ -156,7 +158,7 @@ html.high-contrast button,
 html.high-contrast a,
 html.high-contrast input,
 html.high-contrast select {
-  outline: 2px solid #FFE600 !important;
+  outline: 2px solid var(--amarillo-brillante) !important;
 }
 
 html.reduce-motion *,
@@ -165,5 +167,19 @@ html.reduce-motion *::after {
   animation-duration: 0.001s !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.001s !important;
+}
+
+/* Estilo de Tarjeta Editorial / Deportiva (Anti-IA) */
+.card-deportiva {
+  background-color: var(--azul-rey-dark);
+  border: 1px solid var(--gris-borde);
+  box-shadow: 3px 3px 0px rgba(245, 158, 11, 0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-deportiva:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--amarillo-brillante);
+  border-color: var(--amarillo-brillante);
 }
 
