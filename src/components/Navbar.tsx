@@ -34,8 +34,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenFixtureModal }) => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pt-3 md:pt-5 px-4 sm:px-6 pointer-events-none">
-      <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto">
+    <>
+      {/* Backdrop for Mobile Navigation overlay */}
+      {mobileMenuOpen && (
+        <div 
+          onClick={() => setMobileMenuOpen(false)}
+          className="fixed inset-0 bg-black/45 backdrop-blur-xs z-40 lg:hidden pointer-events-auto animate-in fade-in duration-200"
+          aria-hidden="true"
+        />
+      )}
+
+      <header className="fixed top-0 left-0 right-0 z-50 pt-3 md:pt-5 px-4 sm:px-6 pointer-events-none">
+        <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto">
         
         {/* Off-Center Floating Navigation Container */}
         <div 
@@ -97,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenFixtureModal }) => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden pointer-events-auto mt-2 max-w-md mx-auto bg-white border-2 border-[#061A42] rounded-3xl p-5 shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-top-4">
+        <div className="lg:hidden pointer-events-auto mt-2 max-w-md mx-auto bg-white border-2 border-[#061A42] rounded-3xl p-5 shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-top-4 max-h-[calc(100vh-120px)] overflow-y-auto">
           <div className="flex flex-col gap-3">
             <div className="text-xs font-extrabold text-[#28B838] font-bebas tracking-widest px-2 uppercase">
               PÁGINAS LIGA CANARIA DE BASKET
@@ -141,5 +151,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenFixtureModal }) => {
         </div>
       )}
     </header>
+    </>
   );
 };
