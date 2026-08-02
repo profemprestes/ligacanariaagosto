@@ -9,8 +9,26 @@ export const TeamsCarousel3D: React.FC = () => {
   const [selectedClub, setSelectedClub] = useState<Club | null>(null);
   const [isAutoRotate, setIsAutoRotate] = useState<boolean>(true);
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   const totalClubs = CLUBES_CANELONES.length;
+
+  useEffect(() => {
+    const checkMotion = () => {
+      const isClassActive = document.documentElement.classList.contains('reduce-motion');
+      setReduceMotion(isClassActive);
+    };
+
+    checkMotion();
+
+    const observer = new MutationObserver(checkMotion);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,12 +40,12 @@ export const TeamsCarousel3D: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!isAutoRotate) return;
+    if (!isAutoRotate || reduceMotion) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % totalClubs);
     }, 4000);
     return () => clearInterval(interval);
-  }, [isAutoRotate, totalClubs]);
+  }, [isAutoRotate, totalClubs, reduceMotion]);
 
   const handlePrev = () => {
     setIsAutoRotate(false);
@@ -105,11 +123,11 @@ export const TeamsCarousel3D: React.FC = () => {
             const isCenter = offset === 0;
 
             // 3D positioning transform
-            const rotateY = offset * -28; // Degree of tilt
-            const translateZ = isCenter ? 120 : -absOffset * 180; // Depth Z
-            const translateX = offset * (isSmallScreen ? 140 : 260); // X spread
-            const opacity = isCenter ? 1 : Math.max(0.2, 1 - absOffset * 0.35);
-            const scale = isCenter ? 1.05 : Math.max(0.7, 1 - absOffset * 0.15);
+            const rotateY = reduceMotion ? 0 : offset * -28; // Degree of tilt
+            const translateZ = reduceMotion ? 0 : (isCenter ? 120 : -absOffset * 180); // Depth Z
+            const translateX = reduceMotion ? 0 : offset * (isSmallScreen ? 140 : 260); // X spread
+            const opacity = isCenter ? 1 : (reduceMotion ? 0 : Math.max(0.2, 1 - absOffset * 0.35));
+            const scale = isCenter ? 1.05 : (reduceMotion ? 1 : Math.max(0.7, 1 - absOffset * 0.15));
 
             return (
               <button
@@ -134,8 +152,8 @@ export const TeamsCarousel3D: React.FC = () => {
                 <div 
                   className={`w-full h-full rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden border-4 transition-[border-color,background-color,box-shadow] duration-300 shadow-2xl ${
                     isCenter 
-                      ? 'border-[#FFE600] shadow-[0_20px_50px_rgba(255,230,0,0.25)] bg-[#0B2B6B]' 
-                      : 'border-white/20 bg-[#0B2B6B]/80 backdrop-blur-md'
+                      ? 'border-[#FFE600] shadow-[10px_10px_0px_#061A42] bg-[#0B2B6B]' 
+                      : 'border-white/20 bg-[#0B2B6B]/80 backdrop-blur-md shadow-lg'
                   }`}
                 >
                   {/* Card Background Image with Dark Overlay */}

@@ -34,7 +34,7 @@ export default function Home() {
       {/* 3D Interactive Tilted Teams Carousel */}
       <TeamsCarousel3D />
 
-      {/* AI Generated Vintage Newspaper Carousel for Epic League Moments */}
+      {/* Vintage Editorial Newspaper Carousel for Epic League Moments */}
       <EpicMomentsNewspaperCarousel />
 
       {/* Interactive Canelones Venues & Clubs Map */}

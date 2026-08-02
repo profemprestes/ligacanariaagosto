@@ -211,6 +211,25 @@ export const LeaderboardSection: React.FC = () => {
   const [selectedClub, setSelectedClub] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [modalPlayer, setModalPlayer] = useState<PlayerLeader | null>(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  // Monitor the reduce-motion accessibility class on the document root
+  React.useEffect(() => {
+    const checkMotion = () => {
+      const isClassActive = document.documentElement.classList.contains('reduce-motion');
+      setReduceMotion(isClassActive);
+    };
+
+    checkMotion();
+
+    const observer = new MutationObserver(checkMotion);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // Sort players according to category
   const getSortedPlayers = () => {
@@ -355,22 +374,21 @@ export const LeaderboardSection: React.FC = () => {
                 key={player.id}
                 type="button"
                 onClick={() => setModalPlayer(player)}
-                className="group relative cursor-pointer perspective-1000 transition-transform duration-300 hover:-translate-y-2 text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFE600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B2B6B] rounded-2xl w-full"
+                className={`group relative cursor-pointer perspective-1000 text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFE600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B2B6B] rounded-2xl w-full ${
+                  reduceMotion ? '' : 'transition-transform duration-300 hover:-translate-y-2'
+                }`}
               >
-                {/* Collectible Trading Card Frame */}
-                <div className={`relative rounded-2xl p-4 bg-gradient-to-b ${
+                {/* Collectible Trading Card Frame - Retro Matte cardboard look */}
+                <div className={`relative rounded-2xl p-4 border-3 border-[#061A42] shadow-[6px_6px_0px_#061A42] ${
                   player.cardType === 'GOLD'
-                    ? 'from-[#FFE600] via-[#D4AF37] to-[#B8860B] border-4 border-[#FFE600] shadow-[0_0_25px_rgba(255,230,0,0.35)]'
+                    ? 'bg-[#FFE600]'
                     : player.cardType === 'SILVER'
-                    ? 'from-slate-200 via-slate-400 to-slate-600 border-4 border-slate-300 shadow-[0_0_20px_rgba(203,213,225,0.25)]'
-                    : 'from-amber-600 via-amber-800 to-amber-950 border-4 border-amber-500 shadow-[0_0_15px_rgba(217,119,6,0.2)]'
+                    ? 'bg-[#E2E8F0]'
+                    : 'bg-[#D97706]'
                 }`}>
                   
                   {/* Card Inner Screen */}
                   <div className="bg-[#061A42] rounded-xl p-3 border-2 border-white/20 space-y-3 relative overflow-hidden">
-                    
-                    {/* Metallic Holographic Foil Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                     {/* Top Card Badge: Rank Number & Jersey # */}
                     <div className="flex items-center justify-between">

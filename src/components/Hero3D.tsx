@@ -12,10 +12,29 @@ export const Hero3D: React.FC<Hero3DProps> = ({ onOpenFixtureModal }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  // Monitor the reduce-motion accessibility class on the document root
+  useEffect(() => {
+    const checkMotion = () => {
+      const isClassActive = document.documentElement.classList.contains('reduce-motion');
+      setReduceMotion(isClassActive);
+    };
+
+    checkMotion();
+
+    const observer = new MutationObserver(checkMotion);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // Mouse Parallax Calculation
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
+    if (reduceMotion || !containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -30,12 +49,12 @@ export const Hero3D: React.FC<Hero3DProps> = ({ onOpenFixtureModal }) => {
   };
 
   // Interpolated smooth transform values
-  const tiltX = mousePos.y * -14; // degree
-  const tiltY = mousePos.x * 14; // degree
-  const translateTextX = mousePos.x * 20;
-  const translateTextY = mousePos.y * 20;
-  const translateBallX = mousePos.x * -35;
-  const translateBallY = mousePos.y * -35;
+  const tiltX = reduceMotion ? 0 : mousePos.y * -14; // degree
+  const tiltY = reduceMotion ? 0 : mousePos.x * 14; // degree
+  const translateTextX = reduceMotion ? 0 : mousePos.x * 20;
+  const translateTextY = reduceMotion ? 0 : mousePos.y * 20;
+  const translateBallX = reduceMotion ? 0 : mousePos.x * -35;
+  const translateBallY = reduceMotion ? 0 : mousePos.y * -35;
 
   return (
     <section 
@@ -146,14 +165,14 @@ export const Hero3D: React.FC<Hero3DProps> = ({ onOpenFixtureModal }) => {
             {/* 3D Basketball Graphic Composition with Shadow */}
             <div className="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center">
               
-              {/* Outer Glowing Ring */}
-              <div className="absolute inset-0 rounded-full border-4 border-dashed border-[#FFE600] animate-spin [animation-duration:25s] opacity-70" />
+              {/* Outer Retro Editorial Ring */}
+              <div className="absolute inset-0 rounded-full border-4 border-[#061A42] ring-4 ring-[#FFE600] opacity-80" />
 
-              {/* Middle Rotating Accent Shield */}
-              <div className="absolute -inset-4 bg-[#0B2B6B] rounded-3xl rotate-12 opacity-90 shadow-2xl border-4 border-white transform-style-3d" />
+              {/* Middle Retro Accent Badge */}
+              <div className="absolute -inset-4 bg-[#0B2B6B] rounded-2xl shadow-[8px_8px_0px_#061A42] border-4 border-[#061A42] transform-style-3d" />
 
-              {/* Central Official Logo Badge in 3D */}
-              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-br from-[#28B838] via-[#0B2B6B] to-[#061A42] p-6 shadow-[0_20px_50px_rgba(11,43,107,0.4)] border-4 border-[#FFE600] flex flex-col items-center justify-center overflow-hidden group">
+              {/* Central Official Logo Badge in Retro Style */}
+              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-[#0B2B6B] p-6 shadow-[8px_8px_0px_#061A42] border-4 border-[#061A42] flex flex-col items-center justify-center overflow-hidden group">
                 <Image
                   src="/logo_liga_canaria.png"
                   alt="Liga Canaria de Basket"
