@@ -1,0 +1,21 @@
+# Dependency directories
+/node_modules/
+/pnpm-lock.yaml
+
+# Build & cache directories
+/.next/
+/coverage/
+
+# Deployment & metadata
+/.vercel/
+/.git/
+/.agents/
+/.claude/
+
+# Logs & temp files
+*.log
+.DS_Store
+
+# Secret files (excluding example env configuration)
+.env*
+!.env.example
