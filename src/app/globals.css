@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-azul-rey: #18181B; /* Carbón Estadio */
-  --color-azul-rey-dark: #0F172A; /* Carbón Estadio Dark */
-  --color-verde-vibrante: #059669; /* Verde Parquet */
+  --color-azul-rey: #0B0F19; /* Cancha Carbón */
+  --color-azul-rey-dark: #070A10; /* Cancha Carbón Dark */
+  --color-verde-vibrante: #047857; /* Verde Parquet Profundo */
   --color-verde-vibrante-bright: #10B981; /* Verde Parquet Light */
-  --color-amarillo-brillante: #F59E0B; /* Oro Canario */
+  --color-amarillo-brillante: #F5A623; /* Oro Canario Premium */
   --color-amarillo-hover: #D97706; /* Oro Canario Dark */
   --color-rojo-pasion: #DC2626; /* Rojo Pasión */
-  --color-gris-deportivo: #FDFBF7; /* Papel Crema */
+  --color-gris-deportivo: #FAF9F5; /* Papel Crema Premium */
   --color-gris-borde: #E4E4E7; /* Borde Sólido */
 
   --font-bebas: var(--font-bebas), 'Bebas Neue', sans-serif;
@@ -18,14 +18,14 @@
 
 @layer base {
   :root {
-    --azul-rey: #18181B;
-    --azul-rey-dark: #0F172A;
-    --verde-vibrante: #059669;
+    --azul-rey: #0B0F19;
+    --azul-rey-dark: #070A10;
+    --verde-vibrante: #047857;
     --verde-vibrante-bright: #10B981;
-    --amarillo-brillante: #F59E0B;
+    --amarillo-brillante: #F5A623;
     --amarillo-hover: #D97706;
     --rojo-pasion: #DC2626;
-    --gris-deportivo: #FDFBF7;
+    --gris-deportivo: #FAF9F5;
     --gris-borde: #E4E4E7;
   }
 
@@ -84,10 +84,25 @@
 
 @keyframes pulseYellow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(255, 230, 0, 0.7);
+    box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.7);
   }
   50% {
-    box-shadow: 0 0 0 16px rgba(255, 230, 0, 0);
+    box-shadow: 0 0 0 16px rgba(245, 166, 35, 0);
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }
 
@@ -97,6 +112,11 @@
 
 .pulse-yellow {
   animation: pulseYellow 2.5s infinite;
+}
+
+.animate-route-dash {
+  stroke-dasharray: 8, 4;
+  animation: dash 2.5s linear infinite;
 }
 
 /* Glassmorphism Navigation */
@@ -116,8 +136,8 @@
 }
 
 .editorial-tag {
-  background: #FFE600;
-  color: #061A42;
+  background: #F5A623;
+  color: #070A10;
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 0.05em;
   padding: 0.25rem 0.75rem;
@@ -173,7 +193,7 @@ html.reduce-motion *::after {
 .card-deportiva {
   background-color: var(--azul-rey-dark);
   border: 1px solid var(--gris-borde);
-  box-shadow: 3px 3px 0px rgba(245, 158, 11, 0.15);
+  box-shadow: 3px 3px 0px rgba(245, 166, 35, 0.15);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -181,5 +201,49 @@ html.reduce-motion *::after {
   transform: translateY(-2px);
   box-shadow: 4px 4px 0px var(--amarillo-brillante);
   border-color: var(--amarillo-brillante);
+}
+
+/* Holographic Trading Card Styling */
+.cromo-holografico {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+}
+
+.cromo-holografico::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 30%,
+    rgba(255, 255, 255, 0.25) 48%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.25) 52%,
+    rgba(255, 255, 255, 0.03) 70%,
+    transparent 100%
+  );
+  background-size: 250% 250%;
+  background-position: 200% 0;
+  transition: background-position 0.8s ease;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 10;
+}
+
+.cromo-holografico:hover::before {
+  background-position: -200% 0;
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 166, 35, 0.1) 25%,
+    rgba(255, 215, 0, 0.35) 50%,
+    rgba(245, 166, 35, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
 }
 

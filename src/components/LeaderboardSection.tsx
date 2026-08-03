@@ -214,6 +214,178 @@ const getClubInfo = (clubId: string) => {
   });
 };
 
+
+interface TradingCardProps {
+  player: PlayerLeader;
+  rank: number;
+  isTop3: boolean;
+  getStatValue: (p: PlayerLeader) => string;
+  getClubInfo: (clubId: string) => any;
+  onClick: () => void;
+  reduceMotion: boolean;
+}
+
+const TradingCard: React.FC<TradingCardProps> = ({
+  player,
+  rank,
+  isTop3,
+  getStatValue,
+  getClubInfo,
+  onClick,
+  reduceMotion,
+}) => {
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (reduceMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+    setCoords({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setCoords({ x: 0, y: 0 });
+  };
+
+  const tiltX = reduceMotion ? 0 : coords.y * -16; // max 16deg tilt
+  const tiltY = reduceMotion ? 0 : coords.x * 16;  // max 16deg tilt
+  const sheenX = (coords.x + 0.5) * 100;
+  const sheenY = (coords.y + 0.5) * 100;
+
+  const cardColorClass = player.cardType === 'GOLD'
+    ? 'bg-gradient-to-br from-[#F5A623] via-[#FFE600] to-[#D97706]'
+    : player.cardType === 'SILVER'
+    ? 'bg-gradient-to-br from-slate-300 via-white to-slate-400'
+    : 'bg-gradient-to-br from-amber-700 via-[#B45309] to-amber-900';
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      className="group relative cursor-pointer perspective-1000 text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFE600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B2B6B] rounded-2xl w-full transform-style-3d select-none"
+      style={{
+        transform: isHovered && !reduceMotion ? `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.03)` : 'rotateX(0deg) rotateY(0deg) scale(1)',
+        transition: isHovered ? 'none' : 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)',
+      }}
+    >
+      {/* Collectible Trading Card Frame - Premium Holographic Sheen */}
+      <div className={`relative rounded-2xl p-4 border-3 border-[#070A10] shadow-[6px_6px_0px_#070A10] cromo-holografico ${cardColorClass}`}>
+        
+        {/* Holographic light layer reflection */}
+        {isHovered && !reduceMotion && (
+          <div 
+            className="absolute inset-0 pointer-events-none mix-blend-overlay z-20 opacity-70"
+            style={{
+              background: `radial-gradient(circle at ${sheenX}% ${sheenY}%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 65%)`,
+            }}
+          />
+        )}
+
+        {/* Card Inner Screen */}
+        <div className="bg-[#070A10] rounded-xl p-3 border-2 border-white/20 space-y-3 relative overflow-hidden">
+          
+          {/* Top Card Badge: Rank Number & Jersey # */}
+          <div className="flex items-center justify-between">
+            <div className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-bebas text-xs font-extrabold ${
+              rank === 1
+                ? 'bg-[#FFE600] text-[#070A10]'
+                : rank === 2
+                ? 'bg-slate-200 text-[#070A10]'
+                : rank === 3
+                ? 'bg-amber-600 text-white'
+                : 'bg-white/10 text-gray-300'
+            }`}>
+              {isTop3 && <Trophy className="w-3.5 h-3.5" />}
+              <span>CROMO #{rank}</span>
+            </div>
+
+            <div className="bg-[#0B0F19] text-[#FFE600] font-bebas text-sm font-extrabold px-2 py-0.5 rounded-md border border-[#FFE600]/40">
+              N° {player.jerseyNumber}
+            </div>
+          </div>
+
+          {/* Player Image Photo Area */}
+          <div className="relative h-48 sm:h-52 rounded-lg overflow-hidden border-2 border-white/20 bg-slate-900 group-hover:border-[#FFE600] transition-colors">
+            <img
+              src={player.image}
+              alt={player.name}
+              width={260}
+              height={320}
+              loading="lazy"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+
+            {/* Primary Category Highlight Badge */}
+            <div className="absolute bottom-2 right-2 bg-[#047857] text-white font-bebas text-sm px-2.5 py-0.5 rounded-md border border-white/30 shadow-lg">
+              {getStatValue(player)}
+            </div>
+
+            {/* Position Stamp */}
+            <div className="absolute top-2 left-2 bg-[#070A10]/90 text-white font-bebas text-xs px-2 py-0.5 rounded border border-white/20">
+              {player.position}
+            </div>
+          </div>
+
+          {/* Player Identity */}
+          <div className="space-y-1 text-center border-b border-white/10 pb-2 flex flex-col items-center justify-center">
+            <div className="flex items-center gap-1.5 justify-center">
+              {getClubInfo(player.clubId)?.logo ? (
+                <img 
+                  src={getClubInfo(player.clubId)?.logo} 
+                  alt={player.clubName} 
+                  className="w-4 h-4 object-contain bg-white rounded-xs p-0.5 border border-[#070A10]" 
+                />
+              ) : (
+                <span className="text-[10px]">{getClubInfo(player.clubId)?.badgeSymbol || '🏀'}</span>
+              )}
+              <span className="text-[10px] font-bebas text-[#10B981] tracking-widest uppercase block">
+                {player.clubName}
+              </span>
+            </div>
+            <h3 className="font-serif font-black text-lg text-white uppercase leading-tight truncate text-balance">
+              {player.name}
+            </h3>
+            <p className="text-xs text-[#FFE600] font-bebas italic">
+              “{player.nickname}”
+            </p>
+          </div>
+
+          {/* Mini Stats Breakdown */}
+          <div className="grid grid-cols-3 gap-1 text-center text-[10px] font-bebas">
+            <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
+              <span className="text-gray-400 block text-[9px]">PTS/PJ</span>
+              <span className="text-white font-bold text-xs tabular-nums">{player.stats.pointsPerGame}</span>
+            </div>
+            <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
+              <span className="text-gray-400 block text-[9px]">REB/PJ</span>
+              <span className="text-white font-bold text-xs tabular-nums">{player.stats.reboundsPerGame}</span>
+            </div>
+            <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
+              <span className="text-gray-400 block text-[9px]">AST/PJ</span>
+              <span className="text-white font-bold text-xs tabular-nums">{player.stats.assistsPerGame}</span>
+            </div>
+          </div>
+
+          {/* Card Footer Button */}
+          <div className="pt-1 flex items-center justify-between text-[10px] text-gray-400 font-bebas">
+            <span>LCB 2026 OFFICIAL</span>
+            <span className="text-[#FFE600] flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
+              VER FICHA <ChevronRight className="w-3 h-3" />
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
 export const LeaderboardSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<'ANOTADORES' | 'REBOTES' | 'ASISTENCIAS' | 'EFICIENCIA'>('ANOTADORES');
   const [selectedClub, setSelectedClub] = useState<string>('ALL');
@@ -378,120 +550,16 @@ export const LeaderboardSection: React.FC = () => {
             const isTop3 = rank <= 3;
 
             return (
-              <button
+              <TradingCard
                 key={player.id}
-                type="button"
+                player={player}
+                rank={rank}
+                isTop3={isTop3}
+                getStatValue={getStatValue}
+                getClubInfo={getClubInfo}
                 onClick={() => setModalPlayer(player)}
-                className={`group relative cursor-pointer perspective-1000 text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFE600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B2B6B] rounded-2xl w-full ${
-                  reduceMotion ? '' : 'transition-transform duration-300 hover:-translate-y-2'
-                }`}
-              >
-                {/* Collectible Trading Card Frame - Retro Matte cardboard look */}
-                <div className={`relative rounded-2xl p-4 border-3 border-[#061A42] shadow-[6px_6px_0px_#061A42] ${
-                  player.cardType === 'GOLD'
-                    ? 'bg-[#FFE600]'
-                    : player.cardType === 'SILVER'
-                    ? 'bg-[#E2E8F0]'
-                    : 'bg-[#D97706]'
-                }`}>
-                  
-                  {/* Card Inner Screen */}
-                  <div className="bg-[#061A42] rounded-xl p-3 border-2 border-white/20 space-y-3 relative overflow-hidden">
-
-                    {/* Top Card Badge: Rank Number & Jersey # */}
-                    <div className="flex items-center justify-between">
-                      <div className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-bebas text-xs font-extrabold ${
-                        rank === 1
-                          ? 'bg-[#FFE600] text-[#061A42]'
-                          : rank === 2
-                          ? 'bg-slate-200 text-[#061A42]'
-                          : rank === 3
-                          ? 'bg-amber-600 text-white'
-                          : 'bg-white/10 text-gray-300'
-                      }`}>
-                        {isTop3 && <Trophy className="w-3.5 h-3.5" />}
-                        <span>CROMO #{rank}</span>
-                      </div>
-
-                      <div className="bg-[#0B2B6B] text-[#FFE600] font-bebas text-sm font-extrabold px-2 py-0.5 rounded-md border border-[#FFE600]/40">
-                        N° {player.jerseyNumber}
-                      </div>
-                    </div>
-
-                    {/* Player Image Photo Area */}
-                    <div className="relative h-48 sm:h-52 rounded-lg overflow-hidden border-2 border-white/20 bg-slate-900 group-hover:border-[#FFE600] transition-colors">
-                      <img
-                        src={player.image}
-                        alt={player.name}
-                        width={260}
-                        height={320}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-
-                      {/* Primary Category Highlight Badge */}
-                      <div className="absolute bottom-2 right-2 bg-[#28B838] text-white font-bebas text-sm px-2.5 py-0.5 rounded-md border border-white/30 shadow-lg">
-                        {getStatValue(player)}
-                      </div>
-
-                      {/* Position Stamp */}
-                      <div className="absolute top-2 left-2 bg-[#061A42]/90 text-white font-bebas text-xs px-2 py-0.5 rounded border border-white/20">
-                        {player.position}
-                      </div>
-                    </div>
-
-                    {/* Player Identity */}
-                    <div className="space-y-1 text-center border-b border-white/10 pb-2 flex flex-col items-center justify-center">
-                      <div className="flex items-center gap-1.5 justify-center">
-                        {getClubInfo(player.clubId)?.logo ? (
-                          <img 
-                            src={getClubInfo(player.clubId)?.logo} 
-                            alt={player.clubName} 
-                            className="w-4 h-4 object-contain bg-white rounded-xs p-0.5 border border-[#061A42]" 
-                          />
-                        ) : (
-                          <span className="text-[10px]">{getClubInfo(player.clubId)?.badgeSymbol || '🏀'}</span>
-                        )}
-                        <span className="text-[10px] font-bebas text-[#28B838] tracking-widest uppercase block">
-                          {player.clubName}
-                        </span>
-                      </div>
-                      <h3 className="font-serif font-black text-lg text-white uppercase leading-tight truncate text-balance">
-                        {player.name}
-                      </h3>
-                      <p className="text-xs text-[#FFE600] font-bebas italic">
-                        “{player.nickname}”
-                      </p>
-                    </div>
-
-                    {/* Mini Stats Breakdown */}
-                    <div className="grid grid-cols-3 gap-1 text-center text-[10px] font-bebas">
-                      <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
-                        <span className="text-gray-400 block text-[9px]">PTS/PJ</span>
-                        <span className="text-white font-bold text-xs tabular-nums">{player.stats.pointsPerGame}</span>
-                      </div>
-                      <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
-                        <span className="text-gray-400 block text-[9px]">REB/PJ</span>
-                        <span className="text-white font-bold text-xs tabular-nums">{player.stats.reboundsPerGame}</span>
-                      </div>
-                      <div className="bg-white/5 p-1.5 rounded-lg border border-white/10">
-                        <span className="text-gray-400 block text-[9px]">AST/PJ</span>
-                        <span className="text-white font-bold text-xs tabular-nums">{player.stats.assistsPerGame}</span>
-                      </div>
-                    </div>
-
-                    {/* Card Footer Button */}
-                    <div className="pt-1 flex items-center justify-between text-[10px] text-gray-400 font-bebas">
-                      <span>LCB 2026 OFFICIAL</span>
-                      <span className="text-[#FFE600] flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
-                        VER FICHA <ChevronRight className="w-3 h-3" />
-                      </span>
-                    </div>
-
-                  </div>
-
-                </div>
-              </button>
+                reduceMotion={reduceMotion}
+              />
             );
           })}
         </div>

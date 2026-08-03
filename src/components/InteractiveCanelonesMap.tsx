@@ -227,13 +227,94 @@ export const InteractiveCanelonesMap: React.FC = () => {
             </div>
 
             {/* Interactive SVG Canvas Area */}
-            <div className="relative w-full h-[360px] my-4 rounded-2xl bg-[#0B2B6B]/40 border border-white/10 overflow-hidden flex items-center justify-center">
+            <div className="relative w-full h-[380px] my-4 rounded-2xl bg-[#0B0F19]/60 border border-white/10 overflow-hidden flex items-center justify-center">
               
               {/* Decorative Canelones Department Outline Representation */}
-              <svg viewBox="0 0 100 100" className="w-full h-full p-6 text-white/10 fill-blue-900/40 stroke-white/20 stroke-[0.5]">
-                <path d="M 15 20 Q 30 10 60 15 Q 90 20 85 50 Q 80 80 75 85 Q 40 90 20 70 Q 10 50 15 20 Z" />
-                {/* Connecting Route Lines */}
-                <path d="M 22 28 L 32 72 L 38 32 L 48 48 L 62 60 L 78 78" className="stroke-white/15 stroke-[0.8] stroke-dasharray-[2_2]" />
+              <svg viewBox="0 0 100 100" className="w-full h-full p-4 select-none">
+                {/* Zone 1: Ruta 5 (Oeste) */}
+                <path 
+                  d="M 12 18 L 41 12 L 44 48 L 30 88 L 10 68 Z" 
+                  className={`transition-all duration-500 stroke-white/10 stroke-[0.5] ${
+                    selectedZone === 'TODAS' || selectedZone === 'Ruta 5'
+                      ? 'fill-[#047857]/20 opacity-100'
+                      : 'fill-transparent opacity-10'
+                  }`}
+                />
+                {/* Zone 2: Ruta 8 (Este) */}
+                <path 
+                  d="M 52 10 L 88 15 L 82 52 L 68 82 L 48 48 Z" 
+                  className={`transition-all duration-500 stroke-white/10 stroke-[0.5] ${
+                    selectedZone === 'TODAS' || selectedZone === 'Ruta 8'
+                      ? 'fill-[#0b2b6b]/30 opacity-100'
+                      : 'fill-transparent opacity-10'
+                  }`}
+                />
+                {/* Zone 3: Costa de Oro (Sur Este) */}
+                <path 
+                  d="M 68 82 L 82 52 L 95 65 L 90 90 L 72 90 Z" 
+                  className={`transition-all duration-500 stroke-white/10 stroke-[0.5] ${
+                    selectedZone === 'TODAS' || selectedZone === 'Costa de Oro'
+                      ? 'fill-[#1D4ED8]/25 opacity-100'
+                      : 'fill-transparent opacity-10'
+                  }`}
+                />
+                {/* Zone 4: Eje Central (Centro) */}
+                <path 
+                  d="M 41 12 L 52 10 L 48 48 L 68 82 L 30 88 L 44 48 Z" 
+                  className={`transition-all duration-500 stroke-white/10 stroke-[0.5] ${
+                    selectedZone === 'TODAS' || selectedZone === 'Eje Central'
+                      ? 'fill-[#F5A623]/10 opacity-100'
+                      : 'fill-transparent opacity-10'
+                  }`}
+                />
+
+                {/* Highway Routes (Connecting paths) */}
+                {/* Ruta 5 (Santa Lucía - Canelones - Las Piedras) */}
+                <path 
+                  d="M 22 28 L 38 32 L 32 72" 
+                  fill="none"
+                  className={`transition-all duration-500 stroke-[1.5] ${
+                    selectedZone === 'TODAS' || selectedZone === 'Ruta 5'
+                      ? 'stroke-[#10B981] animate-route-dash'
+                      : 'stroke-white/10'
+                  }`}
+                />
+                {/* Ruta 8 (Tala - Pando) */}
+                <path 
+                  d="M 60 22 L 62 60" 
+                  fill="none"
+                  className={`transition-all duration-500 stroke-[1.5] ${
+                    selectedZone === 'TODAS' || selectedZone === 'Ruta 8'
+                      ? 'stroke-[#38BDF8] animate-route-dash'
+                      : 'stroke-white/10'
+                  }`}
+                />
+                {/* Costa de Oro (Salinas - Albion) */}
+                <path 
+                  d="M 78 78 L 88 65" 
+                  fill="none"
+                  className={`transition-all duration-500 stroke-[1.5] ${
+                    selectedZone === 'TODAS' || selectedZone === 'Costa de Oro'
+                      ? 'stroke-[#F5A623] animate-route-dash'
+                      : 'stroke-white/10'
+                  }`}
+                />
+                {/* Eje Central (Canelones - Sauce - Pando) */}
+                <path 
+                  d="M 38 32 L 48 48 L 62 60" 
+                  fill="none"
+                  className={`transition-all duration-500 stroke-[1.5] ${
+                    selectedZone === 'TODAS' || selectedZone === 'Eje Central'
+                      ? 'stroke-white/60 animate-route-dash'
+                      : 'stroke-white/10'
+                  }`}
+                />
+
+                {/* Visual highway route label tags */}
+                <text x="18" y="24" className="fill-white/30 font-bebas text-[4px]">R5</text>
+                <text x="64" y="24" className="fill-white/30 font-bebas text-[4px]">R8</text>
+                <text x="84" y="74" className="fill-white/30 font-bebas text-[4px]">IB</text>
+                <text x="52" y="44" className="fill-white/30 font-bebas text-[4px]">R6</text>
               </svg>
 
               {/* Map Location Pins */}
@@ -253,8 +334,8 @@ export const InteractiveCanelonesMap: React.FC = () => {
                       {/* Pin Icon with Glow */}
                       <div className={`p-2 rounded-full border-2 transition-all ${
                         isSelected
-                          ? 'bg-[#FFE600] text-[#061A42] border-white shadow-[0_0_20px_#FFE600]'
-                          : 'bg-[#0B2B6B] text-white border-white/40 hover:border-[#FFE600]'
+                          ? 'bg-[#F5A623] text-[#070A10] border-white shadow-[0_0_20px_#F5A623]'
+                          : 'bg-[#0B0F19] text-white border-white/40 hover:border-[#F5A623]'
                       }`}>
                         <MapPin className="w-5 h-5" />
                       </div>
@@ -262,8 +343,8 @@ export const InteractiveCanelonesMap: React.FC = () => {
                       {/* City Name Label Tag */}
                       <span className={`text-[10px] font-bebas tracking-wide px-2 py-0.5 rounded-md mt-1 whitespace-nowrap shadow-md transition-colors ${
                         isSelected
-                          ? 'bg-[#FFE600] text-[#061A42] font-bold'
-                          : 'bg-[#061A42]/90 text-white border border-white/20'
+                          ? 'bg-[#F5A623] text-[#070A10] font-bold'
+                          : 'bg-[#070A10]/90 text-white border border-white/20'
                       }`}>
                         {loc.city}
                       </span>
